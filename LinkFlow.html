@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LinkFlow</title>
+    <style>/* Только базовые стили контейнера и ссылок */</style>
+</head>
+<body>
+    <textarea id="linksInput" placeholder="Вставьте ссылки..."></textarea>
+    <div id="linksContainer"></div>
+    <script>
+        class LinkManager {
+            constructor() {
+                this.links = [];
+                this.visited = new Set();
+                this.init();
+            }
+            init() {
+                this.elements = {
+                    linksInput: document.getElementById('linksInput'),
+                    linksContainer: document.getElementById('linksContainer')
+                };
+                this.setupEventListeners();
+                this.render();
+            }
+            setupEventListeners() {
+                // 1. Автопарсинг при вводе
+                this.elements.linksInput.addEventListener('input', () => {
+                    this.parseLinks();
+                    this.render();
+                });
+                
+                // 2. Клик по ссылке открывает её и помечает
+                this.elements.linksContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('link-url')) {
+                        const index = parseInt(e.target.dataset.index);
+                        this.openLink(index);
+                    }
+                });
+            }
+            parseLinks() { /* Базовый парсинг строк */ }
+            openLink(index) { /* window.open + отметка */ }
+            render() { /* Простой список ссылок */ }
+        }
+        new LinkManager();
+    </script>
+</body>
+</html>
